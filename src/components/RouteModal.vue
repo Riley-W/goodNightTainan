@@ -41,7 +41,12 @@
           <hr />
           <div class="mb-3">
             <label for="title" class="form-label">加入既有的行程</label>
-            <select class="form-select mb-2" id="title" v-model="selectRouteId">
+            <select
+              class="form-select mb-2"
+              id="title"
+              v-model="selectRouteId"
+              @change="getRoute(selectRouteId)"
+            >
               <option :value="0" selected disabled>請選擇行程</option>
               <option
                 v-for="item in titles"
@@ -254,6 +259,7 @@ export default {
         Title: "",
         Dest1: 0,
       },
+      isHaveRoutes: [],
     };
   },
   inject: ["emitter"],
@@ -271,6 +277,45 @@ export default {
         "$1"
       );
       this.newRoute.MemberID = Number(memberId);
+    },
+    getRoute(routeId) {
+      const api = `${process.env.VUE_APP_API}/api/Routes/RouteID/${routeId}`;
+
+      this.$http
+        .get(api)
+        .then((res) => {
+          console.log(res);
+          this.isHaveRoutes = [];
+          if (res.data[0].Dest1) {
+            this.isHaveRoutes.push(res.data[0].Dest1);
+          }
+          if (res.data[0].Dest2) {
+            this.isHaveRoutes.push(res.data[0].Dest2);
+          }
+          if (res.data[0].Dest3) {
+            this.isHaveRoutes.push(res.data[0].Dest3);
+          }
+          if (res.data[0].Dest4) {
+            this.isHaveRoutes.push(res.data[0].Dest4);
+          }
+          if (res.data[0].Dest5) {
+            this.isHaveRoutes.push(res.data[0].Dest5);
+          }
+          if (res.data[0].Dest6) {
+            this.isHaveRoutes.push(res.data[0].Dest6);
+          }
+          if (res.data[0].Dest7) {
+            this.isHaveRoutes.push(res.data[0].Dest7);
+          }
+          if (res.data[0].Dest8) {
+            this.isHaveRoutes.push(res.data[0].Dest8);
+          }
+
+          this.isDisabled = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     addNewRoute() {
       this.isDisabled = true;
@@ -299,20 +344,31 @@ export default {
       item[point] = this.shopId;
       const api = `${process.env.VUE_APP_API}/api/Routes/${item.RouteID}`;
 
-      this.$http
-        .put(api, item)
-        .then(() => {
-          this.emitter.emit("push-message", {
-            style: "success",
-            title: "加入行程結果",
-            content: "已將此景點加入",
-          });
-          this.$emit("get-routes");
-          this.isDisabled = false;
-        })
-        .catch((err) => {
-          console.log(err);
+      if (this.isHaveRoutes.includes(this.shopId)) {
+        this.isDisabled = false;
+        this.closeModal();
+        this.$swal.fire({
+          icon: "error",
+          title: "此行程已經有該店家",
         });
+        return;
+      } else {
+        this.$http
+          .put(api, item)
+          .then(() => {
+            this.emitter.emit("push-message", {
+              style: "success",
+              title: "加入行程結果",
+              content: "已將此景點加入",
+            });
+            this.$emit("get-routes");
+            this.isDisabled = false;
+            this.getRoute(item.RouteID);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
   },
   mounted() {

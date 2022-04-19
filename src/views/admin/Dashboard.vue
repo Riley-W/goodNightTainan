@@ -21,33 +21,35 @@
           id="navbarSupportedContent"
         >
           <div class="navbar-nav text-sm-center">
-            <router-link class="nav-item nav-link text-white mx-2" to="/"
+            <router-link
+              class="nav-item nav-link text-white text-center link-hover-opacity mx-2"
+              to="/"
               >前台首頁</router-link
             >
 
             <router-link
-              class="nav-item nav-link text-white mx-2"
+              class="nav-item nav-link text-white text-center link-hover-opacity mx-2"
               to="/admin/shops"
               >店家管理</router-link
             >
             <router-link
-              class="nav-item nav-link text-white mx-2"
+              class="nav-item nav-link text-white text-center link-hover-opacity mx-2"
               to="/admin/members"
               >會員管理</router-link
             >
             <router-link
-              class="nav-item nav-link text-white mx-2"
+              class="nav-item nav-link text-white text-center link-hover-opacity mx-2"
               to="/admin/forms"
               >意見回饋</router-link
             >
             <router-link
-              class="nav-item nav-link text-white mx-2"
+              class="nav-item nav-link text-white text-center link-hover-opacity mx-2"
               to="/admin/shopreviews"
               >商家評論</router-link
             >
             <a
               href="#"
-              class="nav-item nav-link text-white mx-2"
+              class="nav-item nav-link text-white text-center link-hover-opacity mx-2"
               @click.prevent="logout"
               >登出</a
             >
@@ -140,6 +142,7 @@ export default {
 
 <style lang="scss">
 @import "../../assets/stylesheet/layout/sidebar";
+@import "../../assets/stylesheet/layout/table";
 
 .logoImg {
   height: 45px;

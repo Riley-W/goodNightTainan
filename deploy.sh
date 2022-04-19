@@ -17,6 +17,6 @@ git add -A
 git commit -m 'deploy'
 
 # 部署到 https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:Riley-W/GNT_client.git master:gh-pages
+git push -f git@github.com:Riley-W/goodNightTainan.git master:gh-pages
 
 cd -

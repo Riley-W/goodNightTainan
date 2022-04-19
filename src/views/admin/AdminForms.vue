@@ -14,14 +14,20 @@
     <section
       class="container-fuild side side-admin side-member bg-white pt-6 px-3"
     >
+      <label
+        for="checkShow"
+        class="nav-icon nav-icon-admin nav-icon-member text-dark d-flex"
+      >
+        <span class="material-icons"> arrow_forward_ios </span>
+      </label>
       <div class="container pt-5 side-area">
         <nav class="nav flex-column side-nav">
-          <label
+          <!-- <label
             for="checkShow"
             class="nav-icon nav-icon-member nav-icon-admin text-dark d-flex"
           >
             <span class="material-icons"> arrow_forward_ios </span>
-          </label>
+          </label> -->
           <form action="#" class="mb-3">
             <div class="mb-3 d-flex flex-column">
               <input
